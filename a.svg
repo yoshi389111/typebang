@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="395.89" height="166" viewBox="0 0 395.89 166" >
+<defs>
+<symbol id="glyph10" viewBox="0 0 21.85 100" width="21.85" height="100"><path d="M0 72.22H21.85V21.67H0ZM2.73 69.49V24.4H19.12V69.49ZM9.56 61.3V58.57L5.46 62.66L9.56 66.76V64.03H16.39V55.84H13.66V61.3Z" /></symbol>
+<symbol id="glyph32" viewBox="0 0 21.23 100" width="21.23" height="100"><path d="M2.65 72.22H18.57V66.92H15.92V69.57H5.31V66.92H2.65Z" /></symbol>
+<symbol id="glyph44" viewBox="-9.04 66.13 12.4 18.24" width="12.4" height="18.24" ><path d="M1.41 66.13Q3.36 66.13 3.36 68.57Q3.36 72.35 -0.83 78.44Q-2.53 80.93 -4.85 83Q-6.34 84.37 -7.26 84.37Q-8.13 84.37 -8.67 83.58Q-9.04 83.08 -9.04 82.42Q-9.04 81.51 -7.26 79.89Q-2.2 75.04 -1.33 68.53Q-1.12 67.33 -0.21 66.67Q0.62 66.13 1.41 66.13Z"/></symbol>
+<symbol id="glyph46" viewBox="-2.49 65.96 5.93 8.58" width="5.93" height="8.58" ><path d="M1.49 65.96Q2.4 65.96 3.03 66.79Q3.44 67.33 3.44 68.16Q3.44 70.11 2.36 72.26Q1.24 74.54 -0.58 74.54Q-2.49 74.54 -2.49 72.39Q-2.49 70.23 -1.16 67.99Q0.04 65.96 1.49 65.96Z"/></symbol>
+<symbol id="glyph71" viewBox="0.17 14.93 42 74.25" width="42" height="74.25" ><path d="M18.57 62.69Q15.75 64.64 14.05 65.59Q10.16 67.83 7.3 67.83Q3.94 67.83 1.74 64.55Q0.17 62.19 0.17 59.12Q0.17 50.58 7.63 39.22Q14.55 28.73 23.67 21.14Q31.14 14.93 36.48 14.93Q39.18 14.93 40.88 17.21Q42.16 18.95 42.16 21.31Q42.16 28.52 35.12 36.28Q29.73 42.21 26.95 42.21Q26.33 42.21 25.7 41.71Q25.04 41.13 25.04 40.34Q25.04 39.3 26.87 37.81Q31.55 34.04 34.49 30.1Q39.1 24 39.1 20.44Q39.1 19.49 38.39 18.91Q37.73 18.37 36.77 18.37Q34.58 18.37 30.89 20.94Q23.18 26.37 15.67 36.15Q10.82 42.5 7.59 49.25Q4.77 55.18 4.77 58.96Q4.77 60.45 5.72 61.77Q7.01 63.56 9.08 63.56Q12.02 63.56 16.33 60.45Q21.72 56.55 24.05 54.19Q26 52.2 26.99 52.2Q27.69 52.2 28.15 52.74Q28.73 53.44 28.73 54.48Q28.73 55.64 27.32 57.55Q25.87 59.45 22.84 64.64Q19.36 70.56 16.42 77.49Q13.81 83.58 13.27 85.74Q12.81 87.56 12.23 88.35Q11.61 89.18 10.32 89.18Q9.25 89.18 8.67 88.43Q8.17 87.77 8.17 86.86Q8.17 83.33 12.27 74.67Q12.94 73.3 16.46 66.71Q17.16 65.38 18.57 62.69Z"/></symbol>
+<symbol id="glyph72" viewBox="-1.62 12.52 50.54 60.86" width="50.54" height="60.86" ><path d="M28.9 43.49Q20.36 45.23 11.19 48.88Q10.86 49.54 10.53 50.25Q4.81 61.24 2.82 71.06Q2.4 73.38 0.95 73.38Q-0.12 73.38 -0.95 72.31Q-1.62 71.48 -1.62 70.52Q-1.62 69.36 -0.58 65.69Q0.46 62.02 1.58 59.25Q1.99 58.21 4.19 53.19Q4.73 51.99 5.27 50.66Q4.39 51 2.86 51.66Q2.2 51.95 1.66 51.95Q0.37 51.95 0.37 50Q0.37 48.71 1.45 48.05Q2.28 47.51 4.39 46.77Q6.63 45.94 7.92 45.4Q8.75 43.95 11.07 39.43Q11.48 38.6 13.85 34.7Q20.61 23.34 22.64 18.53Q24.5 14.18 24.96 13.6Q25.79 12.52 26.95 12.52Q28.9 12.52 28.9 14.43Q28.9 18.78 17.04 37.94Q15.09 41.09 14.18 43.41L16.25 42.83Q24.71 40.38 31.63 38.56Q36.4 29.77 43.33 19.07Q44.53 17.16 44.73 16.71Q45.73 14.93 46.85 14.93Q47.8 14.93 48.42 15.71Q48.92 16.38 48.92 17.16Q48.92 18.66 47.31 21.43Q46.93 22.1 43.91 26.74Q38.6 34.95 37.23 37.73Q38.43 37.6 39.05 37.6Q42.33 37.6 42.33 39.22Q42.33 40.22 41.29 41.17Q40.51 41.92 39.55 41.92H37.94Q36.94 41.92 34.95 42.29Q26.16 57.96 23.47 69.78Q22.8 72.43 21.39 72.43Q20.32 72.43 19.36 71.06Q18.74 70.11 18.74 69.03Q18.74 65.05 28.9 43.49Z"/></symbol>
+<symbol id="glyph87" viewBox="1.91 13.85 57.63 61.32" width="57.63" height="61.32" ><path d="M7.09 67.41Q9.49 64.26 11.36 61.36Q12.44 59.66 17.04 52.07L20.56 46.31Q24.46 39.93 25.75 38.14Q27.86 35.12 29.93 35.12Q31.43 35.12 31.43 36.28Q31.43 37.06 30.85 38.27Q30.43 39.1 28.52 44.03Q26.62 49.05 25.58 55.22Q24.83 59.62 24.83 62.73Q24.83 63.64 24.94 64.74Q25.04 65.84 25.25 67.16Q26.91 65.09 28.9 61.19Q30.8 57.3 34.78 48.8Q38.56 40.67 43.62 31.92Q47.76 24.71 53.52 17.33Q56.22 13.85 57.84 13.85Q58.54 13.85 59.12 14.55Q59.54 15.05 59.54 15.67Q59.54 16.5 56.97 19.78Q51.91 26.2 47.31 34Q42.04 43.03 34.12 59.7Q30.6 67.16 28.73 70.32Q26.78 73.55 24.25 73.55Q22.1 73.55 21.02 71.66Q19.94 69.78 19.94 66.04Q19.94 60.03 21.93 51.16Q19.98 53.61 17.37 58.08Q15.42 61.4 13.6 64.47Q10.95 68.91 10.07 70.44Q8.75 72.8 7.34 74.17Q6.3 75.17 4.89 75.17Q3.19 75.17 2.45 73.71Q1.91 72.72 1.91 71.27Q1.91 61.4 12.27 35.9Q17.33 23.42 18.16 20.61Q18.91 17.87 19.65 17.12Q20.65 16.04 21.97 16.04Q23.8 16.04 23.8 17.79Q23.8 19.9 22.22 24.21Q20.44 29.1 16.5 38.06Q13.81 44.24 12.69 47.31Q7.63 62.56 7.09 67.41Z"/></symbol>
+<symbol id="glyph100" viewBox="-3.57 20.07 34.91 50.12" width="34.91" height="50.12" ><path d="M14.3 44.78Q18.45 36.11 22.14 29.68Q25.7 23.47 26.99 21.85Q28.4 20.07 29.64 20.07Q30.31 20.07 30.85 20.61Q31.34 21.14 31.34 21.77Q31.34 22.72 29.93 24.96Q23.92 34.66 18.91 44.65Q13.1 56.3 13.1 62.11Q13.1 64.47 14.01 65.84Q14.18 66.13 15.51 67.16Q15.75 67.37 15.75 67.99Q15.75 68.82 15.11 69.51Q14.47 70.19 13.68 70.19Q12.73 70.19 11.57 69.03Q9.91 67.37 9.58 65.22Q9.45 64.3 9.29 61.82Q4.93 69.65 1 69.65Q-1.29 69.65 -2.65 67.08Q-3.57 65.38 -3.57 63.23Q-3.57 56.76 1.16 50.21Q5.85 43.74 11.24 43.74Q12.73 43.74 14.3 44.78ZM12.89 48.18Q11.77 47.43 10.95 47.43Q7.46 47.43 4.35 51.7Q0.25 57.26 0.25 62.44Q0.25 63.06 0.5 63.6Q1 64.64 1.99 64.64Q3.44 64.64 5.51 61.82Q8.29 58.08 10.66 52.99Q11.48 51.24 12.27 49.5Q12.27 49.5 12.65 48.71L12.89 48.18Z"/></symbol>
+<symbol id="glyph101" viewBox="-3.48 43.53 23.26 25.41" width="23.26" height="25.41" ><path d="M0.83 61.03V61.77Q0.83 62.69 1.29 63.35Q2.32 64.88 4.68 64.88Q9.87 64.88 16.67 56.92Q17.87 55.56 18.7 55.56Q19.15 55.56 19.53 56.01Q19.78 56.34 19.78 56.63Q19.78 58.25 15.8 62.11Q12.69 65.13 9.16 67.04Q5.64 68.95 2.61 68.95Q-0.5 68.95 -2.28 66.79Q-3.48 65.3 -3.48 62.73Q-3.48 55.72 3.11 49Q8.46 43.53 12.44 43.53Q13.52 43.53 14.39 44.2Q15.46 45.07 15.46 46.48Q15.46 48.67 13.43 51.87Q9.25 58.5 0.83 61.03ZM1.74 57.79Q4.64 56.8 6.3 55.56Q9.2 53.32 10.9 50.5Q11.53 49.5 11.53 48.71Q11.53 47.89 10.74 47.89Q9.66 47.89 7.67 49.5Q4.1 52.36 1.74 57.79Z"/></symbol>
+<symbol id="glyph103" viewBox="-14.76 41.71 38.23 50.95" width="38.23" height="50.95" ><path d="M9.99 65.42Q14.43 62.19 16.58 59.54Q19.78 55.68 21.1 53.28Q21.77 52.2 22.47 52.2Q23.47 52.2 23.47 53.15Q23.47 54.27 21.89 56.88Q17 64.84 7.21 70.77Q2.65 80.31 0.5 83.71Q-5.22 92.66 -10.28 92.66Q-12.94 92.66 -14.1 90.59Q-14.76 89.39 -14.76 87.85Q-14.76 81.34 -6.38 75.37Q-5.06 74.38 4.35 69.15Q6.18 65.3 7.17 63.1Q2.82 67.66 -0.04 67.66Q-1.82 67.66 -2.82 65.84Q-3.44 64.64 -3.44 63.35Q-3.44 60.36 -1 55.68Q2.49 48.92 7.38 44.98Q11.48 41.71 14.64 41.71Q16.25 41.71 17.41 42.91Q18.2 43.7 18.2 45.23Q18.2 47.14 16.92 49.96Q17.87 50.87 17.87 51.33Q17.87 51.62 17.45 52.16Q16.33 53.69 13.85 57.92Q11.65 61.61 9.99 65.42ZM9.7 55.85Q9.12 55.22 9.12 54.98Q9.12 54.6 9.74 54.02Q11.82 52.03 13.1 49.88Q14.14 48.18 14.14 47.22Q14.14 46.1 13.1 46.1Q11.32 46.1 8 49.5Q4.06 53.52 1.87 58.5Q0.79 60.99 0.79 62.31Q0.79 63.06 1.12 63.43Q1.45 63.81 2.07 63.81Q3.52 63.81 6.14 60.82Q7.79 58.91 8.96 57.09Q9.74 55.89 9.7 55.85ZM1.87 73.96Q-3.61 76.29 -7.79 81.01Q-9.74 83.21 -10.57 85.66Q-10.82 86.4 -10.82 86.9Q-10.82 87.44 -10.57 87.85Q-10.12 88.6 -9.29 88.6Q-6.72 88.6 -3.28 83.08Q-0.29 78.32 1.87 73.96Z"/></symbol>
+<symbol id="glyph105" viewBox="-4.68 28.77 22.89 41.5" width="22.89" height="41.5" ><path d="M8.46 44.15Q9.16 44.15 9.62 44.69Q9.95 45.15 9.95 45.61Q9.95 46.35 8.75 48.09Q4.44 54.77 2.61 59.08Q0.66 63.52 -0.83 68.2Q-1.49 70.27 -2.9 70.27Q-3.73 70.27 -4.23 69.61Q-4.68 69.07 -4.68 68.45Q-4.68 67.21 -2.03 60.16Q0.04 54.6 4.68 47.89Q6.18 45.69 6.92 44.94Q7.67 44.15 8.46 44.15ZM16.33 28.77Q18.2 28.77 18.2 30.68Q18.2 32.42 16.38 34.54Q14.64 36.57 13.02 36.57Q12.23 36.57 11.73 35.99Q11.24 35.45 11.24 34.66Q11.24 32.67 13.43 30.43Q15.05 28.77 16.33 28.77Z"/></symbol>
+<symbol id="glyph108" viewBox="-2.32 16.5 32.84 52.53" width="32.84" height="52.53" ><path d="M4.39 55.22Q3.15 58.46 2.53 60.45Q1.91 62.44 1.91 63.23Q1.91 64.26 2.9 64.26Q4.39 64.26 6.76 61.44Q7.88 60.07 10.07 56.51Q10.95 55.1 11.9 55.1Q12.98 55.1 12.98 56.14Q12.98 57.92 8.87 63.35Q4.6 69.03 0.95 69.03Q-0.62 69.03 -1.62 67.7Q-2.32 66.75 -2.32 65.38Q-2.32 63.06 -0.91 58.96Q0.5 54.85 3.28 48.96Q10.41 34 17.83 24.3Q23.76 16.5 27.65 16.5Q28.9 16.5 29.68 17.45Q30.51 18.41 30.51 19.65Q30.51 25.46 20.15 38.97Q15.51 44.98 9.04 51Q7.34 52.57 4.39 55.22ZM7.34 48.63Q15.96 41.25 22.76 29.98Q26.29 24.13 26.29 22.22Q26.29 21.31 25.5 21.31Q23.22 21.31 17.21 30.39Q12.23 37.85 7.34 48.63Z"/></symbol>
+<symbol id="glyph109" viewBox="-4.48 44.49 32.92 26.45" width="32.92" height="26.45" ><path d="M4.73 55.18Q8.21 51.53 10.86 49.46Q14.88 46.35 16.25 46.35Q16.92 46.35 17.41 46.85Q17.87 47.31 17.87 47.84Q17.87 48.63 16.42 50.41Q14.18 53.23 13.31 55.22Q23.01 45.48 26.58 45.48Q27.32 45.48 27.86 45.94Q28.44 46.43 28.44 47.18Q28.44 48.34 26.66 50.17Q18.82 58.25 18.82 63.43Q18.82 65.55 19.57 66.46L20.65 67.83Q20.98 68.2 20.98 68.78Q20.98 69.44 20.44 70.02Q19.82 70.69 19.03 70.69Q17.66 70.69 16.5 68.95Q15.09 66.87 15.09 64.05Q15.09 60.28 17.25 56.43Q17.99 55.06 19.73 52.78Q16.21 55.43 12.56 60.07Q10.07 63.23 8.08 67.12Q7.13 68.99 5.85 68.99Q4.44 68.99 4.44 67.41Q4.44 65.71 6.76 60.41Q8.08 57.38 10.03 54.02Q2.94 59.49 -0.62 68.86Q-1.49 70.94 -2.94 70.94Q-3.61 70.94 -4.02 70.44Q-4.48 69.94 -4.48 69.24Q-4.48 66.79 -1.74 60.41Q1.12 53.65 4.73 48.26Q7.21 44.49 8.58 44.49Q9.83 44.49 9.83 45.81Q9.83 46.39 8.29 48.71Q5.6 53.07 4.73 55.18Z"/></symbol>
+<symbol id="glyph110" viewBox="-4.44 45.32 23.96 28.4" width="23.96" height="28.4" ><path d="M5.27 54.77Q5.8 54.27 6.3 53.77Q14.97 45.32 17.91 45.32Q19.53 45.32 19.53 47.1Q19.53 48.34 18.08 50.04Q10.16 59.29 10.16 66.33Q10.16 68.62 11.4 70.69Q11.98 71.64 11.98 72.18Q11.98 72.68 11.48 73.13Q10.95 73.71 10.2 73.71Q8.5 73.71 7.34 71.56Q6.22 69.53 6.22 66.63Q6.22 61.03 10.45 54.23Q4.81 57.84 -0.04 67Q-1.29 69.2 -2.69 69.2Q-3.4 69.2 -3.86 68.7Q-4.44 68.12 -4.44 67.21Q-4.44 64.97 0.66 55.47Q3.4 50.33 4.98 48.01Q6.55 45.73 7.67 45.73Q8.21 45.73 8.71 46.23Q9.29 46.81 9.29 47.55Q9.29 48.47 8.08 50.17Q6.34 52.69 5.27 54.77Z"/></symbol>
+<symbol id="glyph111" viewBox="-2.94 42.25 19.94 27.28" width="19.94" height="27.28" ><path d="M13.6 42.25Q17 42.25 17 46.39Q17 51.91 11.9 60.36Q6.34 69.53 1.16 69.53Q-1.24 69.53 -2.36 67.29Q-2.94 66.17 -2.94 64.59Q-2.94 59.29 0.7 53.07Q4.1 47.31 8.71 44.11Q11.4 42.25 13.6 42.25ZM9.29 57.92Q8.25 57.09 8.25 56.63Q8.25 56.3 9.58 54.81Q13.31 50.62 13.31 48.05Q13.31 47.72 13.1 47.39Q12.77 46.77 12.06 46.77Q10.74 46.77 8.17 49.34Q4.85 52.65 3.11 56.18Q1.08 60.2 1.08 62.85Q1.08 63.56 1.45 64.1Q1.99 64.84 2.82 64.84Q4.81 64.84 7.09 61.86Q8.08 60.61 8.71 59.29Q9.33 57.96 9.29 57.92Z"/></symbol>
+<symbol id="glyph114" viewBox="-4.39 43.45 29.64 27.4" width="29.64" height="27.4" ><path d="M5.14 55.35Q9.2 51 14.51 46.85Q16.42 45.36 18.57 44.07Q19.65 43.45 19.94 43.45Q20.56 43.45 21.19 44.36Q21.56 44.86 21.56 45.27Q21.56 46.02 19.98 47.31Q15.75 50.66 15.75 52.36Q15.75 53.32 16.83 53.32Q18.62 53.32 22.97 50.37Q23.71 49.88 24.21 49.88Q24.54 49.88 24.88 50.21Q25.25 50.58 25.25 51Q25.25 52.24 21.77 54.81Q18.12 57.55 14.84 57.55Q13.52 57.55 12.4 56.84Q11.44 56.26 11.44 54.77Q11.44 53.73 12.31 52.4Q9.04 54.73 4.6 60.36Q2.03 63.85 -0.5 68.95Q-1.45 70.85 -2.86 70.85Q-4.39 70.85 -4.39 69.4Q-4.39 67.99 -1.99 61.86Q1.58 52.74 5.47 47.72Q7.88 44.61 9.49 44.61Q10.03 44.61 10.49 44.94Q11.03 45.36 11.03 45.98Q11.03 46.6 10.2 47.72Q10.03 47.93 8 50.5Q6.14 52.94 5.14 55.35Z"/></symbol>
+</defs>
+<rect x="0" y="0" width="395.89" height="166" fill="white" />
+<g opacity="0">
+<animate attributeName="opacity" id="line0" begin="500ms;line1.end" values="1;1;0" dur="6435.1826ms" keyTimes="0;0.84;1" />
+<animateTransform attributeName="transform" begin="line0.begin" type="translate" values="0,0;0,0;0,-100" dur="6435.1826ms" keyTimes="0;0.84;1" />
+<g>
+<animateTransform attributeName="transform" begin="line0.begin" type="translate" values="0 0;0 0;2 3;0 0;0 0;-4 4;0 0;0 0;0 4;0 0;0 0;0 3;0 0;0 0;0 5;0 0;0 0;-2 4;0 0;0 0;-4 3;0 0;0 0;2 3;0 0;0 0;2 4;0 0;0 0;0 3;0 0;0 0;2 3;0 0;0 0;2 3;0 0;0 0;2 4;0 0;0 0;-9 10;0 0;0 0" dur="6435.1826ms" keyTimes="0;0;0;0.02;0.07;0.07;0.09;0.11;0.11;0.13;0.17;0.17;0.18;0.21;0.21;0.23;0.27;0.27;0.28;0.34;0.34;0.35;0.41;0.41;0.42;0.48;0.48;0.5;0.54;0.54;0.55;0.59;0.59;0.61;0.64;0.64;0.66;0.7;0.7;0.71;0.77;0.77;0.78;1" />
+<use id="l0c0" href="#glyph72" x="31.38" y="45.52" fill="black" >
+<animate attributeName="fill" begin="line0.begin" values="white;white;#ff2000;black;black" dur="6435.1826ms" keyTimes="0;0;0;0.16;1" />
+<animate attributeName="stroke" begin="line0.begin" values="white;white;#ff2000;black;black" dur="6435.1826ms" keyTimes="0;0;0;0.16;1" />
+<animate attributeName="stroke-width" begin="line0.begin" values="0;0;0.7;0;0" dur="6435.1826ms" keyTimes="0;0;0;0.16;1" />
+</use>
+<use id="l0c1" href="#glyph101" x="68.53" y="76.53" fill="black" >
+<animate attributeName="fill" begin="line0.begin" values="white;white;#ff2000;black;black" dur="6435.1826ms" keyTimes="0;0.07;0.07;0.23;1" />
+<animate attributeName="stroke" begin="line0.begin" values="white;white;#ff2000;black;black" dur="6435.1826ms" keyTimes="0;0.07;0.07;0.23;1" />
+<animate attributeName="stroke-width" begin="line0.begin" values="0;0;0.7;0;0" dur="6435.1826ms" keyTimes="0;0.07;0.07;0.23;1" />
+</use>
+<use id="l0c2" href="#glyph108" x="92.99" y="49.5" fill="black" >
+<animate attributeName="fill" begin="line0.begin" values="white;white;#ff2000;black;black" dur="6435.1826ms" keyTimes="0;0.11;0.11;0.27;1" />
+<animate attributeName="stroke" begin="line0.begin" values="white;white;#ff2000;black;black" dur="6435.1826ms" keyTimes="0;0.11;0.11;0.27;1" />
+<animate attributeName="stroke-width" begin="line0.begin" values="0;0;0.7;0;0" dur="6435.1826ms" keyTimes="0;0.11;0.11;0.27;1" />
+</use>
+<use id="l0c3" href="#glyph108" x="111.23" y="49.5" fill="black" >
+<animate attributeName="fill" begin="line0.begin" values="white;white;#ff2000;black;black" dur="6435.1826ms" keyTimes="0;0.17;0.17;0.32;1" />
+<animate attributeName="stroke" begin="line0.begin" values="white;white;#ff2000;black;black" dur="6435.1826ms" keyTimes="0;0.17;0.17;0.32;1" />
+<animate attributeName="stroke-width" begin="line0.begin" values="0;0;0.7;0;0" dur="6435.1826ms" keyTimes="0;0.17;0.17;0.32;1" />
+</use>
+<use id="l0c4" href="#glyph111" x="128.85" y="75.25" fill="black" >
+<animate attributeName="fill" begin="line0.begin" values="white;white;#ff2000;black;black" dur="6435.1826ms" keyTimes="0;0.21;0.21;0.37;1" />
+<animate attributeName="stroke" begin="line0.begin" values="white;white;#ff2000;black;black" dur="6435.1826ms" keyTimes="0;0.21;0.21;0.37;1" />
+<animate attributeName="stroke-width" begin="line0.begin" values="0;0;0.7;0;0" dur="6435.1826ms" keyTimes="0;0.21;0.21;0.37;1" />
+</use>
+<use id="l0c5" href="#glyph44" x="142.45" y="99.13" fill="black" >
+<animate attributeName="fill" begin="line0.begin" values="white;white;#ff2000;black;black" dur="6435.1826ms" keyTimes="0;0.27;0.27;0.42;1" />
+<animate attributeName="stroke" begin="line0.begin" values="white;white;#ff2000;black;black" dur="6435.1826ms" keyTimes="0;0.27;0.27;0.42;1" />
+<animate attributeName="stroke-width" begin="line0.begin" values="0;0;0.7;0;0" dur="6435.1826ms" keyTimes="0;0.27;0.27;0.42;1" />
+</use>
+<use id="l0c6" href="#glyph32" x="169.03" y="33" fill="black" >
+<animate attributeName="fill" begin="line0.begin" values="white;white;#ff2000;black;black" dur="6435.1826ms" keyTimes="0;0.34;0.34;0.49;1" />
+<animate attributeName="opacity" begin="line0.begin" values="0;0;1;0;0" dur="6435.1826ms" keyTimes="0;0.34;0.34;0.49;1" />
+</use>
+<use id="l0c7" href="#glyph87" x="192.16" y="46.85" fill="black" >
+<animate attributeName="fill" begin="line0.begin" values="white;white;#ff2000;black;black" dur="6435.1826ms" keyTimes="0;0.41;0.41;0.56;1" />
+<animate attributeName="stroke" begin="line0.begin" values="white;white;#ff2000;black;black" dur="6435.1826ms" keyTimes="0;0.41;0.41;0.56;1" />
+<animate attributeName="stroke-width" begin="line0.begin" values="0;0;0.7;0;0" dur="6435.1826ms" keyTimes="0;0.41;0.41;0.56;1" />
+</use>
+<use id="l0c8" href="#glyph111" x="234.49" y="75.25" fill="black" >
+<animate attributeName="fill" begin="line0.begin" values="white;white;#ff2000;black;black" dur="6435.1826ms" keyTimes="0;0.48;0.48;0.64;1" />
+<animate attributeName="stroke" begin="line0.begin" values="white;white;#ff2000;black;black" dur="6435.1826ms" keyTimes="0;0.48;0.48;0.64;1" />
+<animate attributeName="stroke-width" begin="line0.begin" values="0;0;0.7;0;0" dur="6435.1826ms" keyTimes="0;0.48;0.48;0.64;1" />
+</use>
+<use id="l0c9" href="#glyph114" x="252.73" y="76.45" fill="black" >
+<animate attributeName="fill" begin="line0.begin" values="white;white;#ff2000;black;black" dur="6435.1826ms" keyTimes="0;0.54;0.54;0.69;1" />
+<animate attributeName="stroke" begin="line0.begin" values="white;white;#ff2000;black;black" dur="6435.1826ms" keyTimes="0;0.54;0.54;0.69;1" />
+<animate attributeName="stroke-width" begin="line0.begin" values="0;0;0.7;0;0" dur="6435.1826ms" keyTimes="0;0.54;0.54;0.69;1" />
+</use>
+<use id="l0c10" href="#glyph108" x="280.76" y="49.5" fill="black" >
+<animate attributeName="fill" begin="line0.begin" values="white;white;#ff2000;black;black" dur="6435.1826ms" keyTimes="0;0.59;0.59;0.75;1" />
+<animate attributeName="stroke" begin="line0.begin" values="white;white;#ff2000;black;black" dur="6435.1826ms" keyTimes="0;0.59;0.59;0.75;1" />
+<animate attributeName="stroke-width" begin="line0.begin" values="0;0;0.7;0;0" dur="6435.1826ms" keyTimes="0;0.59;0.59;0.75;1" />
+</use>
+<use id="l0c11" href="#glyph100" x="297.76" y="53.07" fill="black" >
+<animate attributeName="fill" begin="line0.begin" values="white;white;#ff2000;black;black" dur="6435.1826ms" keyTimes="0;0.64;0.64;0.8;1" />
+<animate attributeName="stroke" begin="line0.begin" values="white;white;#ff2000;black;black" dur="6435.1826ms" keyTimes="0;0.64;0.64;0.8;1" />
+<animate attributeName="stroke-width" begin="line0.begin" values="0;0;0.7;0;0" dur="6435.1826ms" keyTimes="0;0.64;0.64;0.8;1" />
+</use>
+<use id="l0c12" href="#glyph46" x="321.02" y="98.96" fill="black" >
+<animate attributeName="fill" begin="line0.begin" values="white;white;#ff2000;black;black" dur="6435.1826ms" keyTimes="0;0.7;0.7;0.85;1" />
+<animate attributeName="stroke" begin="line0.begin" values="white;white;#ff2000;black;black" dur="6435.1826ms" keyTimes="0;0.7;0.7;0.85;1" />
+<animate attributeName="stroke-width" begin="line0.begin" values="0;0;0.7;0;0" dur="6435.1826ms" keyTimes="0;0.7;0.7;0.85;1" />
+</use>
+<use id="l0c13" href="#glyph10" x="341.04" y="33" fill="black" >
+<animate attributeName="fill" begin="line0.begin" values="white;white;#ff2000;black;black" dur="6435.1826ms" keyTimes="0;0.77;0.77;0.92;1" />
+<animate attributeName="opacity" begin="line0.begin" values="0;0;1;0;0" dur="6435.1826ms" keyTimes="0;0.77;0.77;0.92;1" />
+</use>
+</g>
+</g>
+<g opacity="0">
+<animate attributeName="opacity" id="line1" begin="line0.end" values="1;1;0" dur="5827.253ms" keyTimes="0;0.83;1" />
+<animateTransform attributeName="transform" begin="line1.begin" type="translate" values="0,0;0,0;0,-100" dur="5827.253ms" keyTimes="0;0.83;1" />
+<g>
+<animateTransform attributeName="transform" begin="line1.begin" type="translate" values="0 0;0 0;-2 3;0 0;0 0;2 3;0 0;0 0;0 5;0 0;0 0;-2 3;0 0;0 0;2 5;0 0;0 0;0 5;0 0;0 0;0 4;0 0;0 0;-2 4;0 0;0 0;-2 3;0 0;0 0;-2 5;0 0;0 0;-4 3;0 0;0 0;0 4;0 0;0 0;-4 4;0 0;0 0;-9 10;0 0;0 0" dur="5827.253ms" keyTimes="0;0;0;0.02;0.08;0.08;0.1;0.12;0.12;0.14;0.18;0.18;0.2;0.22;0.22;0.23;0.29;0.29;0.31;0.36;0.36;0.38;0.42;0.42;0.43;0.46;0.46;0.48;0.51;0.51;0.52;0.55;0.55;0.56;0.61;0.61;0.63;0.66;0.66;0.68;0.74;0.74;0.76;1" />
+<use id="l1c0" href="#glyph71" x="33.17" y="47.93" fill="black" >
+<animate attributeName="fill" begin="line1.begin" values="white;white;#ff2000;black;black" dur="5827.253ms" keyTimes="0;0;0;0.17;1" />
+<animate attributeName="stroke" begin="line1.begin" values="white;white;#ff2000;black;black" dur="5827.253ms" keyTimes="0;0;0;0.17;1" />
+<animate attributeName="stroke-width" begin="line1.begin" values="0;0;0.7;0;0" dur="5827.253ms" keyTimes="0;0;0;0.17;1" />
+</use>
+<use id="l1c1" href="#glyph111" x="63.97" y="75.25" fill="black" >
+<animate attributeName="fill" begin="line1.begin" values="white;white;#ff2000;black;black" dur="5827.253ms" keyTimes="0;0.08;0.08;0.25;1" />
+<animate attributeName="stroke" begin="line1.begin" values="white;white;#ff2000;black;black" dur="5827.253ms" keyTimes="0;0.08;0.08;0.25;1" />
+<animate attributeName="stroke-width" begin="line1.begin" values="0;0;0.7;0;0" dur="5827.253ms" keyTimes="0;0.08;0.08;0.25;1" />
+</use>
+<use id="l1c2" href="#glyph111" x="83.66" y="75.25" fill="black" >
+<animate attributeName="fill" begin="line1.begin" values="white;white;#ff2000;black;black" dur="5827.253ms" keyTimes="0;0.12;0.12;0.29;1" />
+<animate attributeName="stroke" begin="line1.begin" values="white;white;#ff2000;black;black" dur="5827.253ms" keyTimes="0;0.12;0.12;0.29;1" />
+<animate attributeName="stroke-width" begin="line1.begin" values="0;0;0.7;0;0" dur="5827.253ms" keyTimes="0;0.12;0.12;0.29;1" />
+</use>
+<use id="l1c3" href="#glyph100" x="102.73" y="53.07" fill="black" >
+<animate attributeName="fill" begin="line1.begin" values="white;white;#ff2000;black;black" dur="5827.253ms" keyTimes="0;0.18;0.18;0.35;1" />
+<animate attributeName="stroke" begin="line1.begin" values="white;white;#ff2000;black;black" dur="5827.253ms" keyTimes="0;0.18;0.18;0.35;1" />
+<animate attributeName="stroke-width" begin="line1.begin" values="0;0;0.7;0;0" dur="5827.253ms" keyTimes="0;0.18;0.18;0.35;1" />
+</use>
+<use id="l1c4" href="#glyph32" x="128.48" y="33" fill="black" >
+<animate attributeName="fill" begin="line1.begin" values="white;white;#ff2000;black;black" dur="5827.253ms" keyTimes="0;0.22;0.22;0.39;1" />
+<animate attributeName="opacity" begin="line1.begin" values="0;0;1;0;0" dur="5827.253ms" keyTimes="0;0.22;0.22;0.39;1" />
+</use>
+<use id="l1c5" href="#glyph109" x="145.23" y="77.49" fill="black" >
+<animate attributeName="fill" begin="line1.begin" values="white;white;#ff2000;black;black" dur="5827.253ms" keyTimes="0;0.29;0.29;0.46;1" />
+<animate attributeName="stroke" begin="line1.begin" values="white;white;#ff2000;black;black" dur="5827.253ms" keyTimes="0;0.29;0.29;0.46;1" />
+<animate attributeName="stroke-width" begin="line1.begin" values="0;0;0.7;0;0" dur="5827.253ms" keyTimes="0;0.29;0.29;0.46;1" />
+</use>
+<use id="l1c6" href="#glyph111" x="176.91" y="75.25" fill="black" >
+<animate attributeName="fill" begin="line1.begin" values="white;white;#ff2000;black;black" dur="5827.253ms" keyTimes="0;0.36;0.36;0.54;1" />
+<animate attributeName="stroke" begin="line1.begin" values="white;white;#ff2000;black;black" dur="5827.253ms" keyTimes="0;0.36;0.36;0.54;1" />
+<animate attributeName="stroke-width" begin="line1.begin" values="0;0;0.7;0;0" dur="5827.253ms" keyTimes="0;0.36;0.36;0.54;1" />
+</use>
+<use id="l1c7" href="#glyph114" x="195.15" y="76.45" fill="black" >
+<animate attributeName="fill" begin="line1.begin" values="white;white;#ff2000;black;black" dur="5827.253ms" keyTimes="0;0.42;0.42;0.59;1" />
+<animate attributeName="stroke" begin="line1.begin" values="white;white;#ff2000;black;black" dur="5827.253ms" keyTimes="0;0.42;0.42;0.59;1" />
+<animate attributeName="stroke-width" begin="line1.begin" values="0;0;0.7;0;0" dur="5827.253ms" keyTimes="0;0.42;0.42;0.59;1" />
+</use>
+<use id="l1c8" href="#glyph110" x="221.06" y="78.32" fill="black" >
+<animate attributeName="fill" begin="line1.begin" values="white;white;#ff2000;black;black" dur="5827.253ms" keyTimes="0;0.46;0.46;0.63;1" />
+<animate attributeName="stroke" begin="line1.begin" values="white;white;#ff2000;black;black" dur="5827.253ms" keyTimes="0;0.46;0.46;0.63;1" />
+<animate attributeName="stroke-width" begin="line1.begin" values="0;0;0.7;0;0" dur="5827.253ms" keyTimes="0;0.46;0.46;0.63;1" />
+</use>
+<use id="l1c9" href="#glyph105" x="242.66" y="61.77" fill="black" >
+<animate attributeName="fill" begin="line1.begin" values="white;white;#ff2000;black;black" dur="5827.253ms" keyTimes="0;0.51;0.51;0.68;1" />
+<animate attributeName="stroke" begin="line1.begin" values="white;white;#ff2000;black;black" dur="5827.253ms" keyTimes="0;0.51;0.51;0.68;1" />
+<animate attributeName="stroke-width" begin="line1.begin" values="0;0;0.7;0;0" dur="5827.253ms" keyTimes="0;0.51;0.51;0.68;1" />
+</use>
+<use id="l1c10" href="#glyph110" x="254.1" y="78.32" fill="black" >
+<animate attributeName="fill" begin="line1.begin" values="white;white;#ff2000;black;black" dur="5827.253ms" keyTimes="0;0.55;0.55;0.72;1" />
+<animate attributeName="stroke" begin="line1.begin" values="white;white;#ff2000;black;black" dur="5827.253ms" keyTimes="0;0.55;0.55;0.72;1" />
+<animate attributeName="stroke-width" begin="line1.begin" values="0;0;0.7;0;0" dur="5827.253ms" keyTimes="0;0.55;0.55;0.72;1" />
+</use>
+<use id="l1c11" href="#glyph103" x="265.63" y="74.71" fill="black" >
+<animate attributeName="fill" begin="line1.begin" values="white;white;#ff2000;black;black" dur="5827.253ms" keyTimes="0;0.61;0.61;0.78;1" />
+<animate attributeName="stroke" begin="line1.begin" values="white;white;#ff2000;black;black" dur="5827.253ms" keyTimes="0;0.61;0.61;0.78;1" />
+<animate attributeName="stroke-width" begin="line1.begin" values="0;0;0.7;0;0" dur="5827.253ms" keyTimes="0;0.61;0.61;0.78;1" />
+</use>
+<use id="l1c12" href="#glyph46" x="303.81" y="98.96" fill="black" >
+<animate attributeName="fill" begin="line1.begin" values="white;white;#ff2000;black;black" dur="5827.253ms" keyTimes="0;0.66;0.66;0.83;1" />
+<animate attributeName="stroke" begin="line1.begin" values="white;white;#ff2000;black;black" dur="5827.253ms" keyTimes="0;0.66;0.66;0.83;1" />
+<animate attributeName="stroke-width" begin="line1.begin" values="0;0;0.7;0;0" dur="5827.253ms" keyTimes="0;0.66;0.66;0.83;1" />
+</use>
+<use id="l1c13" href="#glyph10" x="323.84" y="33" fill="black" >
+<animate attributeName="fill" begin="line1.begin" values="white;white;#ff2000;black;black" dur="5827.253ms" keyTimes="0;0.74;0.74;0.91;1" />
+<animate attributeName="opacity" begin="line1.begin" values="0;0;1;0;0" dur="5827.253ms" keyTimes="0;0.74;0.74;0.91;1" />
+</use>
+</g>
+</g>
+</svg>
