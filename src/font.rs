@@ -1,5 +1,6 @@
 use anyhow::Context;
 
+/// Returns the font ID for the given font name, if it exists.
 pub fn get_font_id(db: &fontdb::Database, font_name: &str) -> Option<fontdb::ID> {
     let families = match font_name.to_lowercase().as_str() {
         "sans-serif" => vec![
@@ -34,7 +35,7 @@ pub fn get_font_id(db: &fontdb::Database, font_name: &str) -> Option<fontdb::ID>
     db.query(&query)
 }
 
-/// This module provides functionality for loading fonts and executing operations on them.
+/// Loads the specified font and executes the provided closure with the loaded font face.
 pub fn load_and_run<T>(
     font_name: &str,
     f: impl for<'a> FnOnce(&ttf_parser::Face<'_>) -> T,
@@ -62,5 +63,5 @@ pub fn load_and_run<T>(
             .with_context(|| format!("Failed to parse font data for '{}'", font_name))?;
         Ok(f(&face))
     })
-    .ok_or_else(|| anyhow::anyhow!("Failed to parse font data for '{}'", font_name))?
+    .ok_or_else(|| anyhow::anyhow!("Font '{}' not found", font_name))?
 }

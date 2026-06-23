@@ -1,5 +1,6 @@
 use crate::number::round_float;
 
+/// Represents a builder for constructing SVG path data from font outlines.
 pub struct SvgPathBuilder {
     scale: f32,
     ascender: f32,

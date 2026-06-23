@@ -2,161 +2,58 @@ use crate::font;
 use crate::glyph;
 use crate::number::round_float;
 
-/// The height of the glyphs in the SVG viewBox.
-const GLYPH_HEIGHT: f32 = glyph::GLYPH_HEIGHT;
-const MARGIN_TOP: f32 = GLYPH_HEIGHT * 0.33;
-const MARGIN_RIGHT: f32 = GLYPH_HEIGHT * 0.33;
-const MARGIN_LEFT: f32 = MARGIN_RIGHT;
-const MARGIN_BOTTOM: f32 = MARGIN_TOP;
+/// The time to wait before starting the first line of text.
+const TIME_START: f32 = 500.0; // [ms]
+/// The time to wait after displaying a line of text before starting the next line.
+const TIME_BETWEEN_LINES: f32 = 1000.0; // [ms]
 
-const WAIT_TOP: f32 = 0.0; // [ms]
-const WAIT_LAST: f32 = 1000.0; // [ms]
-const WAIT_STRONG: f32 = 1000.0; // [ms]
-const WAIT_CLACK: f32 = 100.0; // [ms]
+/// The time duration for displaying a character quickly.
+const TIME_QUICK_PUNCH: f32 = 200.0; // [ms]
+/// The time duration for displaying a normal character.
+const TIME_KEY_PUNCH: f32 = 400.0; // [ms]
+/// The time duration for displaying a newline character.
+const TIME_ENTER_KEY: f32 = 500.0; // [ms]
 
-fn extract_unique_characters(messages: &[String]) -> Vec<char> {
-    let mut unique_chars = std::collections::HashSet::new();
-    for message in messages {
-        for ch in message.chars() {
-            unique_chars.insert(ch);
-        }
-    }
-    unique_chars.into_iter().collect()
+/// The time duration for displaying a character with emphasis effect.
+const TIME_EMPHASIS_EFFECT: f32 = 1000.0; // [ms]
+/// The time duration for the "jolt" effect when displaying a character.
+const TIME_JOLT_EFFECT: f32 = 100.0; // [ms]
+
+/// Configuration for generating SVG output.
+pub struct Config {
+    pub font_name: String,
+
+    pub fg_color: String,
+    pub bg_color: String,
+    pub strong_color: String,
+
+    pub messages: Vec<String>,
 }
 
-fn calculate_message_width(
-    glyph_map: &std::collections::BTreeMap<char, glyph::GlyphInfo>,
-    message: &str,
-) -> f32 {
-    message
-        .chars()
-        .flat_map(|ch| glyph_map.get(&ch))
-        .map(|glyph_info| glyph_info.width)
-        .sum()
-}
+/// Generates an SVG representation of the provided messages using the specified font and colors.
+pub fn generate(out: &mut impl std::fmt::Write, config: &Config) -> anyhow::Result<()> {
+    const GLYPH_HEIGHT: f32 = glyph::GLYPH_HEIGHT;
 
-fn calculate_max_message_width(
-    glyph_map: &std::collections::BTreeMap<char, glyph::GlyphInfo>,
-    messages: &[String],
-) -> f32 {
-    messages
-        .iter()
-        .map(|message| calculate_message_width(glyph_map, message))
-        .fold(0.0, f32::max)
-}
+    const MARGIN_TOP: f32 = GLYPH_HEIGHT * 0.33;
+    const MARGIN_BOTTOM: f32 = MARGIN_TOP;
+    const MARGIN_LEFT: f32 = GLYPH_HEIGHT * 0.33;
+    const MARGIN_RIGHT: f32 = MARGIN_LEFT;
 
-fn create_glyph_map(
-    face: &ttf_parser::Face,
-    characters: &[char],
-) -> std::collections::BTreeMap<char, glyph::GlyphInfo> {
-    let mut glyph_map = std::collections::BTreeMap::new();
-    for &ch in characters {
-        if let Some(glyph_info) = glyph::create_glyph_info(face, ch) {
-            glyph_map.insert(ch, glyph_info);
-        }
-    }
-    glyph_map
-}
+    let Config {
+        font_name,
+        fg_color,
+        bg_color,
+        strong_color,
+        messages,
+    } = config;
 
-fn decide_wait_time(ch: char, prev_ch: Option<char>) -> f32 {
-    const TIME_QUICK: f32 = 200.0; // [ms]
-    const TIME_PUNCH: f32 = 400.0; // [ms]
-    const TIME_ENTER: f32 = 500.0; // [ms]
-    if ch == '\n' {
-        TIME_ENTER
-    } else if let Some(prev) = prev_ch
-        && prev.is_ascii_alphabetic()
-        && ch.is_ascii_alphabetic()
-        && !(prev.is_ascii_lowercase() && ch.is_ascii_uppercase())
-    {
-        TIME_QUICK + rand::random_range(0.0..200.0)
-    } else {
-        TIME_PUNCH + rand::random_range(0.0..100.0)
-    }
-}
-
-struct CharInfo {
-    ch: char,
-    x_offset: f32,
-    y_offset: f32,
-    wait: f32, // [ms]
-}
-
-fn create_char_info_list(
-    message: &str,
-    glyph_map: &std::collections::BTreeMap<char, glyph::GlyphInfo>,
-) -> Vec<CharInfo> {
-    let mut char_info_list = Vec::new();
-    let mut pen_x = 0.0;
-    let mut prev_ch = None;
-    for ch in message.chars() {
-        let Some(glyph_info) = glyph_map.get(&ch) else {
-            // Skip characters that don't have a corresponding glyph
-            continue;
-        };
-
-        char_info_list.push(CharInfo {
-            ch,
-            x_offset: pen_x + glyph_info.x_offset,
-            y_offset: glyph_info.y_offset,
-            wait: decide_wait_time(ch, prev_ch),
-        });
-
-        pen_x += glyph_info.width;
-        prev_ch = Some(ch);
-    }
-    char_info_list
-}
-
-fn create_clack_values(char_info_list: &[CharInfo]) -> String {
-    let mut values = String::new();
-    values += "0 0;";
-    for char_info in char_info_list {
-        let ch = char_info.ch;
-        let (dx, dy) = if ch == '\n' {
-            (-9.0, 10.0)
-        } else {
-            let dx = (rand::random_range(-1..=1) + rand::random_range(-1..=1)) as f32 * 2.0;
-            let dy = rand::random_range(3..6) as f32;
-            (dx, dy)
-        };
-        let dx = round_float(dx);
-        let dy = round_float(dy);
-        values += &format!("0 0;{dx} {dy};0 0;");
-    }
-    values += "0 0";
-    values
-}
-
-fn create_clack_key_times(char_info_list: &[CharInfo], total_time: f32) -> String {
-    let mut key_times = String::new();
-    key_times += "0;";
-    let mut current_time = WAIT_TOP;
-    for char_info in char_info_list {
-        let t1 = round_float(current_time / total_time);
-        let t2 = round_float((current_time + WAIT_CLACK) / total_time);
-        key_times += &format!("{t1};{t1};{t2};");
-        current_time += char_info.wait;
-    }
-    key_times += "1";
-    key_times
-}
-
-pub fn generate(
-    out: &mut impl std::fmt::Write,
-    messages: &[String],
-    font_name: &str,
-    fg_color: &str,
-    bg_color: &str,
-    strong_color: &str,
-) -> anyhow::Result<()> {
     let characters = extract_unique_characters(messages);
-    let glyph_map = font::load_and_run(font_name, |face| create_glyph_map(face, &characters))?;
+    let glyph_map =
+        font::load_and_run(font_name, |face| glyph::create_glyph_map(face, &characters))?;
 
     let maximum_message_width = calculate_max_message_width(&glyph_map, messages);
-    let height = GLYPH_HEIGHT;
     let canvas_width = round_float(MARGIN_LEFT + maximum_message_width + MARGIN_RIGHT);
-    let canvas_height = round_float(MARGIN_TOP + height + MARGIN_BOTTOM);
+    let canvas_height = round_float(MARGIN_TOP + GLYPH_HEIGHT + MARGIN_BOTTOM);
 
     // SVG header
     writeln!(
@@ -193,15 +90,17 @@ pub fn generate(
         let char_info_list = create_char_info_list(message, &glyph_map);
 
         let total_time =
-            char_info_list.iter().map(|info| info.wait).sum::<f32>() + WAIT_TOP + WAIT_LAST;
+            char_info_list.iter().map(|info| info.wait).sum::<f32>() + TIME_BETWEEN_LINES;
 
         let trigger = if i == 0 {
-            &format!("500ms;line{}.end", messages.len() - 1)
+            let last_number = messages.len() - 1;
+            &format!("{TIME_START}ms;line{last_number}.end")
         } else {
-            &format!("line{}.end", i - 1)
+            let prev_number = i - 1;
+            &format!("line{prev_number}.end")
         };
-        let base_trigger = &format!("line{i}.begin");
-        let t3 = round_float((total_time - WAIT_LAST) / total_time);
+        let line_begin_trigger = &format!("line{i}.begin");
+        let timing_last = create_timing(total_time - TIME_BETWEEN_LINES, total_time);
 
         writeln!(out, "<g opacity=\"0\">")?;
         writeln!(
@@ -212,38 +111,38 @@ pub fn generate(
                 begin=\"{trigger}\" \
                 values=\"1;1;0\" \
                 dur=\"{total_time}ms\" \
-                keyTimes=\"0;{t3};1\" \
+                keyTimes=\"0;{timing_last};1\" \
             />"
         )?;
         writeln!(
             out,
             "<animateTransform \
                 attributeName=\"transform\" \
-                begin=\"{base_trigger}\" \
                 type=\"translate\" \
+                begin=\"{line_begin_trigger}\" \
                 values=\"0,0;0,0;0,-{GLYPH_HEIGHT}\" \
                 dur=\"{total_time}ms\" \
-                keyTimes=\"0;{t3};1\" \
+                keyTimes=\"0;{timing_last};1\" \
             />"
         )?;
         writeln!(out, "<g>")?;
 
-        let clack_values = create_clack_values(&char_info_list);
-        let clack_key_times = create_clack_key_times(&char_info_list, total_time);
+        let jolt_values = create_jolt_values(&char_info_list);
+        let jolt_key_times = create_jolt_key_times(&char_info_list, total_time);
         writeln!(
             out,
             "<animateTransform \
                 attributeName=\"transform\" \
-                begin=\"{base_trigger}\" \
                 type=\"translate\" \
-                values=\"{clack_values}\" \
+                begin=\"{line_begin_trigger}\" \
+                values=\"{jolt_values}\" \
                 dur=\"{total_time}ms\" \
-                keyTimes=\"{clack_key_times}\" \
+                keyTimes=\"{jolt_key_times}\" \
             />"
         )?;
 
-        let mut current_time = WAIT_TOP;
-        for (j, char_info) in char_info_list.iter().enumerate() {
+        let mut current_time = 0.0;
+        for char_info in char_info_list.iter() {
             let glyph_number = u32::from(char_info.ch);
             let x = round_float(MARGIN_LEFT + char_info.x_offset);
             let y = round_float(MARGIN_TOP + char_info.y_offset);
@@ -253,23 +152,22 @@ pub fn generate(
             writeln!(
                 out,
                 "<use \
-                    id=\"l{i}c{j}\" \
                     href=\"#glyph{glyph_number}\" \
                     x=\"{x}\" \
                     y=\"{y}\" \
                     fill=\"{fg}\" \
                 >"
             )?;
-            let t1 = round_float(current_time / total_time);
-            let t2 = round_float((current_time + WAIT_STRONG) / total_time);
+            let timing_start = create_timing(current_time, total_time);
+            let timing_strong_end = create_timing(current_time + TIME_EMPHASIS_EFFECT, total_time);
             writeln!(
                 out,
                 "<animate \
                     attributeName=\"fill\" \
-                    begin=\"{base_trigger}\" \
+                    begin=\"{line_begin_trigger}\" \
                     values=\"{bg};{bg};{st};{fg};{fg}\" \
                     dur=\"{total_time}ms\" \
-                    keyTimes=\"0;{t1};{t1};{t2};1\" \
+                    keyTimes=\"0;{timing_start};{timing_start};{timing_strong_end};1\" \
                 />"
             )?;
             if glyph_number <= 0x20 {
@@ -277,10 +175,10 @@ pub fn generate(
                     out,
                     "<animate \
                         attributeName=\"opacity\" \
-                        begin=\"{base_trigger}\" \
+                        begin=\"{line_begin_trigger}\" \
                         values=\"0;0;1;0;0\" \
                         dur=\"{total_time}ms\" \
-                        keyTimes=\"0;{t1};{t1};{t2};1\" \
+                        keyTimes=\"0;{timing_start};{timing_start};{timing_strong_end};1\" \
                     />"
                 )?;
             } else {
@@ -288,20 +186,20 @@ pub fn generate(
                     out,
                     "<animate \
                         attributeName=\"stroke\" \
-                        begin=\"{base_trigger}\" \
+                        begin=\"{line_begin_trigger}\" \
                         values=\"{bg};{bg};{st};{fg};{fg}\" \
                         dur=\"{total_time}ms\" \
-                        keyTimes=\"0;{t1};{t1};{t2};1\" \
+                        keyTimes=\"0;{timing_start};{timing_start};{timing_strong_end};1\" \
                     />"
                 )?;
                 writeln!(
                     out,
                     "<animate \
                         attributeName=\"stroke-width\" \
-                        begin=\"{base_trigger}\" \
-                        values=\"0;0;0.7;0;0\" \
+                        begin=\"{line_begin_trigger}\" \
+                        values=\"0;0;2;0;0\" \
                         dur=\"{total_time}ms\" \
-                        keyTimes=\"0;{t1};{t1};{t2};1\" \
+                        keyTimes=\"0;{timing_start};{timing_start};{timing_strong_end};1\" \
                     />"
                 )?;
             }
@@ -314,4 +212,127 @@ pub fn generate(
 
     writeln!(out, "</svg>")?;
     Ok(())
+}
+
+/// Extracts unique characters from the provided messages and returns them as a vector of characters.
+fn extract_unique_characters(messages: &[String]) -> Vec<char> {
+    let unique_chars = messages
+        .iter()
+        .flat_map(|message| message.chars())
+        .collect::<std::collections::HashSet<_>>();
+    unique_chars.into_iter().collect()
+}
+
+/// Calculates the maximum width of the provided messages based on the glyph information.
+fn calculate_max_message_width(
+    glyph_map: &std::collections::BTreeMap<char, glyph::GlyphInfo>,
+    messages: &[String],
+) -> f32 {
+    messages
+        .iter()
+        .map(|message| calculate_message_width(glyph_map, message))
+        .fold(0.0, f32::max)
+}
+
+/// Calculates the width of a single message based on the glyph information.
+fn calculate_message_width(
+    glyph_map: &std::collections::BTreeMap<char, glyph::GlyphInfo>,
+    message: &str,
+) -> f32 {
+    message
+        .chars()
+        .flat_map(|ch| glyph_map.get(&ch))
+        .map(|glyph_info| glyph_info.feed_width)
+        .sum()
+}
+
+/// Represents information about a character, including its offsets and wait time.
+struct CharInfo {
+    ch: char,
+    x_offset: f32,
+    y_offset: f32,
+    wait: f32, // [ms]
+}
+
+/// Creates a list of character information for the provided message based on the glyph map.
+fn create_char_info_list(
+    message: &str,
+    glyph_map: &std::collections::BTreeMap<char, glyph::GlyphInfo>,
+) -> Vec<CharInfo> {
+    let mut char_info_list = Vec::new();
+    let mut pen_x = 0.0;
+    let mut prev_ch = None;
+    for ch in message.chars() {
+        let Some(glyph_info) = glyph_map.get(&ch) else {
+            // Skip characters that don't have a corresponding glyph
+            continue;
+        };
+
+        char_info_list.push(CharInfo {
+            ch,
+            x_offset: pen_x + glyph_info.x_offset,
+            y_offset: glyph_info.y_offset,
+            wait: decide_wait_time(ch, prev_ch),
+        });
+
+        pen_x += glyph_info.feed_width;
+        prev_ch = Some(ch);
+    }
+    char_info_list
+}
+
+/// Determines the wait time for a character based on its type and the previous character.
+fn decide_wait_time(ch: char, prev_ch: Option<char>) -> f32 {
+    if ch == '\n' {
+        TIME_ENTER_KEY
+    } else if let Some(prev) = prev_ch
+        && prev.is_ascii_alphabetic()
+        && ch.is_ascii_alphabetic()
+        && !(prev.is_ascii_lowercase() && ch.is_ascii_uppercase())
+    {
+        TIME_QUICK_PUNCH + rand::random_range(0.0..200.0)
+    } else {
+        TIME_KEY_PUNCH + rand::random_range(0.0..100.0)
+    }
+}
+
+/// Creates a normalized timing value for a target time relative to the total time.
+fn create_timing(target_time: f32, total_time: f32) -> String {
+    round_float(target_time / total_time)
+}
+
+/// Creates a string representing the key times for the "jolt" effect based on the character information and total time.
+fn create_jolt_key_times(char_info_list: &[CharInfo], total_time: f32) -> String {
+    let mut key_times = String::new();
+    key_times += "0;";
+    let mut current_time = 0.0;
+    for char_info in char_info_list {
+        let time_jolt_start = round_float(current_time / total_time);
+        let time_jolt_end = round_float((current_time + TIME_JOLT_EFFECT) / total_time);
+        key_times += &format!("{time_jolt_start};{time_jolt_start};{time_jolt_end};");
+        current_time += char_info.wait;
+    }
+    key_times += "1";
+    key_times
+}
+
+/// Creates a string representing the values for the "jolt" effect based on the character information.
+fn create_jolt_values(char_info_list: &[CharInfo]) -> String {
+    let mut values = String::new();
+    values += "0 0;";
+    for char_info in char_info_list {
+        let ch = char_info.ch;
+        let (dx, dy) = if ch == '\n' {
+            (-9.0, 10.0)
+        } else {
+            let dx = (rand::random_range(-1..=1) + rand::random_range(-1..=1)) as f32 * 2.0;
+            let dy = rand::random_range(3..6) as f32;
+            (dx, dy)
+        };
+        let dx = round_float(dx);
+        let dy = round_float(dy);
+        values += &format!("0 0;{dx} {dy};0 0;");
+    }
+    values += "0 0";
+    values
 }

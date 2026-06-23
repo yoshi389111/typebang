@@ -7,35 +7,172 @@ pub const GLYPH_HEIGHT: f32 = 100.0;
 pub struct GlyphInfo {
     pub x_offset: f32,
     pub y_offset: f32,
-    pub width: f32,
+    pub feed_width: f32,
     pub symbol: String,
 }
 
+/// Creates a mapping of characters to their corresponding glyph information for the given font face.
+pub fn create_glyph_map(
+    face: &ttf_parser::Face,
+    characters: &[char],
+) -> std::collections::BTreeMap<char, GlyphInfo> {
+    let mut glyph_map = std::collections::BTreeMap::new();
+    for &ch in characters {
+        if let Some(glyph_info) = create_glyph_info(face, ch) {
+            glyph_map.insert(ch, glyph_info);
+        }
+    }
+    glyph_map
+}
+
+/// Creates glyph information for a specific character based on the provided font face.
+pub fn create_glyph_info(face: &ttf_parser::Face, ch: char) -> Option<GlyphInfo> {
+    match ch {
+        ' ' => create_space_glyph_info(face),
+        '\n' => create_enter_glyph_info(face),
+        _ => create_normal_glyph_info(face, ch),
+    }
+}
+
+/// Creates glyph information for a normal character (not space or enter) based on the provided font face.
 fn create_normal_glyph_info(face: &ttf_parser::Face, ch: char) -> Option<GlyphInfo> {
     let glyph_id = face.glyph_index(ch)?;
-    let height = GLYPH_HEIGHT;
-    let scale = height / face.height() as f32;
-    let ascender = face.ascender() as f32;
+    let scale = GLYPH_HEIGHT / face.height() as f32;
+
+    let ascender_raw = face.ascender() as f32;
 
     let path_data = {
-        let mut builder = SvgPathBuilder::new(scale, ascender);
+        let mut builder = SvgPathBuilder::new(scale, ascender_raw);
         face.outline_glyph(glyph_id, &mut builder);
         builder.path_data
     };
 
-    let width = face.glyph_hor_advance(glyph_id)? as f32 * scale;
-    let bbox = face.glyph_bounding_box(glyph_id)?;
-    let x_offset = bbox.x_min as f32 * scale;
-    let y_offset = (ascender - bbox.y_max as f32) * scale;
+    let bbox_raw = face.glyph_bounding_box(glyph_id)?;
+    let x_offset = bbox_raw.x_min as f32 * scale;
+    let y_offset = (ascender_raw - bbox_raw.y_max as f32) * scale;
 
-    let box_left = round_float(x_offset);
-    let box_top = round_float(y_offset);
-    let box_width = round_float((bbox.x_max as f32 - bbox.x_min as f32) * scale);
-    let box_height = round_float((bbox.y_max as f32 - bbox.y_min as f32) * scale);
+    let symbol = create_symbol_path(
+        ch,
+        x_offset,
+        y_offset,
+        (bbox_raw.x_max as f32 - bbox_raw.x_min as f32) * scale,
+        (bbox_raw.y_max as f32 - bbox_raw.y_min as f32) * scale,
+        &path_data,
+    );
 
+    // Note that the width of the bbox may exceed the advance width.
+    let feed_width = face.glyph_hor_advance(glyph_id)? as f32 * scale;
+
+    let glyph_info = GlyphInfo {
+        feed_width,
+        symbol,
+        x_offset,
+        y_offset,
+    };
+    Some(glyph_info)
+}
+
+/// Creates glyph information for the space character based on the provided font face.
+fn create_space_glyph_info(face: &ttf_parser::Face) -> Option<GlyphInfo> {
+    let glyph_id = face.glyph_index(' ')?;
+    let scale = GLYPH_HEIGHT / face.height() as f32;
+
+    let width_raw = face.glyph_hor_advance(glyph_id)? as f32;
+    let ascender_raw = face.ascender() as f32;
+    let stroke_width_raw = ascender_raw * 0.05;
+
+    let path_data = {
+        let mut builder = SvgPathBuilder::new(scale, ascender_raw);
+        builder.move_to(0.0, 0.0);
+        builder.line_to(width_raw - stroke_width_raw, 0.0);
+        builder.line_to(width_raw - stroke_width_raw, stroke_width_raw * 2.0);
+        builder.line_to(width_raw - stroke_width_raw * 2.0, stroke_width_raw * 2.0);
+        builder.line_to(width_raw - stroke_width_raw * 2.0, stroke_width_raw);
+        builder.line_to(stroke_width_raw, stroke_width_raw);
+        builder.line_to(stroke_width_raw, stroke_width_raw * 2.0);
+        builder.line_to(0.0, stroke_width_raw * 2.0);
+        builder.close();
+        builder.path_data
+    };
+
+    let width = width_raw * scale;
+    let height = GLYPH_HEIGHT; // as face.height() * scale;
+    let symbol = create_symbol_path(' ', 0.0, 0.0, width, height, &path_data);
+
+    let glyph_info = GlyphInfo {
+        feed_width: width,
+        symbol,
+        x_offset: 0.0,
+        y_offset: 0.0,
+    };
+    Some(glyph_info)
+}
+
+/// Creates glyph information for the enter character based on the provided font face.
+fn create_enter_glyph_info(face: &ttf_parser::Face) -> Option<GlyphInfo> {
+    let scale = GLYPH_HEIGHT / face.height() as f32;
+
+    let ascender_raw = face.ascender() as f32;
+    let stroke_width_raw = ascender_raw * 0.05;
+    let width_raw = stroke_width_raw * 8.0;
+    let height_raw = stroke_width_raw * 12.0; // as ascender_raw * 0.6
+
+    let path_data = {
+        let mut builder = SvgPathBuilder::new(scale, ascender_raw);
+        // Draw the outer rectangle.
+        builder.move_to(0.0, 0.0);
+        builder.line_to(width_raw, 0.0);
+        builder.line_to(width_raw, height_raw);
+        builder.line_to(0.0, height_raw);
+        builder.close();
+        // Draw the inner rectangle.
+        builder.move_to(stroke_width_raw, stroke_width_raw);
+        builder.line_to(stroke_width_raw, height_raw - stroke_width_raw);
+        builder.line_to(width_raw - stroke_width_raw, height_raw - stroke_width_raw);
+        builder.line_to(width_raw - stroke_width_raw, stroke_width_raw);
+        builder.close();
+        // Draw the inner arrow shape.
+        builder.move_to(stroke_width_raw * 3.5, stroke_width_raw * 4.0);
+        builder.line_to(stroke_width_raw * 3.5, stroke_width_raw * 5.0);
+        builder.line_to(stroke_width_raw * 2.0, stroke_width_raw * 3.5);
+        builder.line_to(stroke_width_raw * 3.5, stroke_width_raw * 2.0);
+        builder.line_to(stroke_width_raw * 3.5, stroke_width_raw * 3.0);
+        builder.line_to(width_raw - stroke_width_raw * 2.0, stroke_width_raw * 3.0);
+        builder.line_to(width_raw - stroke_width_raw * 2.0, stroke_width_raw * 6.0);
+        builder.line_to(width_raw - stroke_width_raw * 3.0, stroke_width_raw * 6.0);
+        builder.line_to(width_raw - stroke_width_raw * 3.0, stroke_width_raw * 4.0);
+        builder.close();
+        builder.path_data
+    };
+
+    let width = width_raw * scale;
+    let height = GLYPH_HEIGHT; // as face.height() * scale
+    let symbol = create_symbol_path('\n', 0.0, 0.0, width, height, &path_data);
+
+    let glyph_info = GlyphInfo {
+        feed_width: width,
+        symbol,
+        x_offset: 0.0,
+        y_offset: 0.0,
+    };
+    Some(glyph_info)
+}
+
+/// Creates an SVG symbol element for a glyph with the specified parameters.
+fn create_symbol_path(
+    ch: char,
+    box_left: f32,
+    box_top: f32,
+    box_width: f32,
+    box_height: f32,
+    path_data: &str,
+) -> String {
     let glyph_number = u32::from(ch);
-
-    let symbol = format!(
+    let box_left = round_float(box_left);
+    let box_top = round_float(box_top);
+    let box_width = round_float(box_width);
+    let box_height = round_float(box_height);
+    format!(
         "<symbol \
             id=\"glyph{glyph_number}\" \
             viewBox=\"{box_left} {box_top} {box_width} {box_height}\" \
@@ -44,123 +181,5 @@ fn create_normal_glyph_info(face: &ttf_parser::Face, ch: char) -> Option<GlyphIn
         >\
         <path d=\"{path_data}\"/>\
         </symbol>",
-    );
-
-    let glyph_info = GlyphInfo {
-        width,
-        symbol,
-        x_offset,
-        y_offset,
-    };
-    Some(glyph_info)
-}
-
-fn create_space_glyph_info(face: &ttf_parser::Face) -> Option<GlyphInfo> {
-    let glyph_id = face.glyph_index(' ')?;
-    let height = GLYPH_HEIGHT;
-    let scale = height / face.height() as f32;
-    let width_advance = face.glyph_hor_advance(glyph_id)? as f32;
-    let ascender = face.ascender() as f32;
-
-    let path_data = {
-        let stroke_width_horizontal = width_advance * 0.125;
-        let stroke_width_vertical = ascender * 0.125;
-        let stroke_width = stroke_width_horizontal.min(stroke_width_vertical);
-        let mut builder = SvgPathBuilder::new(scale, ascender);
-        builder.move_to(stroke_width, 0.0);
-        builder.line_to(width_advance - stroke_width, 0.0);
-        builder.line_to(width_advance - stroke_width, stroke_width * 2.0);
-        builder.line_to(width_advance - stroke_width * 2.0, stroke_width * 2.0);
-        builder.line_to(width_advance - stroke_width * 2.0, stroke_width);
-        builder.line_to(stroke_width * 2.0, stroke_width);
-        builder.line_to(stroke_width * 2.0, stroke_width * 2.0);
-        builder.line_to(stroke_width, stroke_width * 2.0);
-        builder.close();
-        builder.path_data
-    };
-
-    let glyph_number = u32::from(' ');
-    let width = width_advance * scale;
-
-    let symbol = format!(
-        "<symbol id=\"glyph{}\" viewBox=\"0 0 {} {}\" width=\"{}\" height=\"{}\"><path d=\"{}\" /></symbol>",
-        glyph_number,
-        round_float(width),
-        round_float(height),
-        round_float(width),
-        round_float(height),
-        path_data
-    );
-
-    let glyph_info = GlyphInfo {
-        width,
-        symbol,
-        x_offset: 0.0,
-        y_offset: 0.0,
-    };
-    Some(glyph_info)
-}
-
-fn create_enter_glyph_info(face: &ttf_parser::Face) -> Option<GlyphInfo> {
-    let glyph_id = face.glyph_index('n')?;
-    let height = GLYPH_HEIGHT;
-    let scale = height / face.height() as f32;
-    let width_advance = face.glyph_hor_advance(glyph_id)? as f32;
-
-    let path_data = {
-        let ascender = face.ascender() as f32;
-        let box_height = ascender * 0.7;
-        let stroke_width_horizontal = width_advance * 0.125;
-        let stroke_width_vertical = box_height * 0.125;
-        let stroke_width = stroke_width_horizontal.min(stroke_width_vertical);
-        let mut builder = SvgPathBuilder::new(scale, ascender);
-        builder.move_to(0.0, 0.0);
-        builder.line_to(width_advance, 0.0);
-        builder.line_to(width_advance, box_height);
-        builder.line_to(0.0, box_height);
-        builder.close();
-        builder.move_to(stroke_width, stroke_width);
-        builder.line_to(stroke_width, box_height - stroke_width);
-        builder.line_to(width_advance - stroke_width, box_height - stroke_width);
-        builder.line_to(width_advance - stroke_width, stroke_width);
-        builder.close();
-        builder.move_to(stroke_width * 3.5, stroke_width * 4.0);
-        builder.line_to(stroke_width * 3.5, stroke_width * 5.0);
-        builder.line_to(stroke_width * 2.0, stroke_width * 3.5);
-        builder.line_to(stroke_width * 3.5, stroke_width * 2.0);
-        builder.line_to(stroke_width * 3.5, stroke_width * 3.0);
-        builder.line_to(width_advance - stroke_width * 2.0, stroke_width * 3.0);
-        builder.line_to(width_advance - stroke_width * 2.0, stroke_width * 6.0);
-        builder.line_to(width_advance - stroke_width * 3.0, stroke_width * 6.0);
-        builder.line_to(width_advance - stroke_width * 3.0, stroke_width * 4.0);
-        builder.close();
-        builder.path_data
-    };
-
-    let width = width_advance * scale;
-    let symbol = format!(
-        "<symbol id=\"glyph{}\" viewBox=\"0 0 {} {}\" width=\"{}\" height=\"{}\"><path d=\"{}\" /></symbol>",
-        u32::from('\n'),
-        round_float(width),
-        round_float(height),
-        round_float(width),
-        round_float(height),
-        path_data
-    );
-
-    let glyph_info = GlyphInfo {
-        width,
-        symbol,
-        x_offset: 0.0,
-        y_offset: 0.0,
-    };
-    Some(glyph_info)
-}
-
-pub fn create_glyph_info(face: &ttf_parser::Face, ch: char) -> Option<GlyphInfo> {
-    match ch {
-        ' ' => create_space_glyph_info(face),
-        '\n' => create_enter_glyph_info(face),
-        _ => create_normal_glyph_info(face, ch),
-    }
+    )
 }

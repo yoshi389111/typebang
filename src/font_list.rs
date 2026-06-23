@@ -1,3 +1,4 @@
+/// Lists all installed font families, including generic families.
 pub fn print_font_families(out: &mut impl std::fmt::Write) -> anyhow::Result<()> {
     let db = {
         let mut db = fontdb::Database::new();
