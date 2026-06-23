@@ -63,5 +63,5 @@ pub fn load_and_run<T>(
             .with_context(|| format!("Failed to parse font data for '{}'", font_name))?;
         Ok(f(&face))
     })
-    .ok_or_else(|| anyhow::anyhow!("Font '{}' not found", font_name))?
+    .ok_or_else(|| anyhow::anyhow!("Font data for '{}' not available", font_name))?
 }
