@@ -94,12 +94,12 @@ pub fn generate(out: &mut impl std::fmt::Write, config: &Config) -> anyhow::Resu
 
         let trigger = if i == 0 {
             let last_number = messages.len() - 1;
-            &format!("{TIME_START}ms;line{last_number}.end")
+            format!("{TIME_START}ms;line{last_number}.end")
         } else {
             let prev_number = i - 1;
-            &format!("line{prev_number}.end")
+            format!("line{prev_number}.end")
         };
-        let line_begin_trigger = &format!("line{i}.begin");
+        let line_begin_trigger = format!("line{i}.begin");
         let timing_last = create_timing(total_time - TIME_BETWEEN_LINES, total_time);
 
         writeln!(out, "<g opacity=\"0\">")?;
