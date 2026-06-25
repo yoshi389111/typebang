@@ -4,6 +4,8 @@ use anyhow::Context;
 pub fn run(args: &crate::Args) -> anyhow::Result<()> {
     if args.list_fonts {
         print_font_families()
+    } else if args.list_faces {
+        print_font_faces(args)
     } else {
         output_svg(args)
     }
@@ -26,11 +28,15 @@ fn output_svg(args: &crate::Args) -> anyhow::Result<()> {
     };
     let mut out = typebang::io::Utf8Writer::new(io_writer);
 
+    let font_filter = create_font_filter(&args.font, &args.font_face);
+
     let config = typebang::svg::Config {
-        font_name: args.font.clone(),
+        font_filter,
+
         fg_color: args.fg_color.clone(),
         bg_color: args.bg_color.clone(),
         strong_color: args.strong_color.clone(),
+
         messages,
     };
 
@@ -40,8 +46,40 @@ fn output_svg(args: &crate::Args) -> anyhow::Result<()> {
 
 /// Outputs the list of available font families to stdout.
 fn print_font_families() -> anyhow::Result<()> {
-    let mut out = typebang::io::Utf8Writer::new(std::io::stdout());
-    typebang::font_list::print_font_families(&mut out)
+    let families = typebang::font::get_families()?;
+
+    println!("Generic families:");
+    println!("  sans-serif");
+    println!("  serif");
+    println!("  monospace");
+    println!();
+
+    println!("Installed font families:");
+
+    if families.is_empty() {
+        println!("  No fonts found.");
+    } else {
+        for family in families {
+            println!("  {family}");
+        }
+    }
+    Ok(())
+}
+
+fn print_font_faces(args: &crate::Args) -> anyhow::Result<()> {
+    let font_name = &args.font;
+    let font_filter = create_font_filter(font_name, &None);
+    let post_script_names = typebang::font::get_font_faces(&font_filter)?;
+
+    println!("Font faces for '{}':", font_name);
+    if post_script_names.is_empty() {
+        println!("  No fonts found.");
+    } else {
+        for post_script_name in post_script_names {
+            println!("  {post_script_name}");
+        }
+    }
+    Ok(())
 }
 
 /// Checks if the messages indicate that input should be read from stdin.
@@ -70,4 +108,34 @@ fn split_message(messages: &[String]) -> Vec<String> {
         .flat_map(|message| message.split('\n'))
         .map(|s| s.to_string() + "\n")
         .collect::<Vec<String>>()
+}
+
+fn create_font_filter(
+    font_path_or_name: &str,
+    font_face: &Option<String>,
+) -> typebang::font::Filter {
+    if let Some(path) = get_valid_path(font_path_or_name) {
+        typebang::font::Filter {
+            source: typebang::font::Source::File(path),
+            name: font_face.clone(),
+        }
+    } else {
+        typebang::font::Filter {
+            source: typebang::font::Source::System,
+            name: Some(font_path_or_name.to_string()),
+        }
+    }
+}
+
+fn get_valid_path(path: &str) -> Option<std::path::PathBuf> {
+    if !path.contains('/') && !path.contains('\\') {
+        return None;
+    }
+
+    let path = std::path::Path::new(path);
+    if !path.exists() {
+        return None;
+    }
+
+    Some(path.to_path_buf())
 }

@@ -21,7 +21,7 @@ const TIME_JOLT_EFFECT: f32 = 100.0; // [ms]
 
 /// Configuration for generating SVG output.
 pub struct Config {
-    pub font_name: String,
+    pub font_filter: font::Filter,
 
     pub fg_color: String,
     pub bg_color: String,
@@ -40,16 +40,19 @@ pub fn generate(out: &mut impl std::fmt::Write, config: &Config) -> anyhow::Resu
     const MARGIN_RIGHT: f32 = MARGIN_LEFT;
 
     let Config {
-        font_name,
+        font_filter,
+
         fg_color,
         bg_color,
         strong_color,
+
         messages,
     } = config;
 
     let characters = extract_unique_characters(messages);
-    let glyph_map =
-        font::load_and_run(font_name, |face| glyph::create_glyph_map(face, &characters))?;
+    let glyph_map = font::load_and_run(font_filter, |face| {
+        glyph::create_glyph_map(face, &characters)
+    })?;
 
     let maximum_message_width = calculate_max_message_width(&glyph_map, messages);
     let canvas_width = round_float(MARGIN_LEFT + maximum_message_width + MARGIN_RIGHT);
