@@ -7,6 +7,9 @@ pub struct Args {
     /// Font name to use for rendering text
     #[arg(short, long, default_value = "monospace")]
     font: String,
+    /// Font face to use for rendering text (only applicable when font is a file path)
+    #[arg(long)]
+    font_face: Option<String>,
 
     /// Output file path
     #[arg(short, long)]
@@ -25,6 +28,10 @@ pub struct Args {
     /// List available fonts
     #[arg(long, default_value_t = false)]
     list_fonts: bool,
+
+    /// List available faces
+    #[arg(long, default_value_t = false)]
+    list_faces: bool,
 
     /// Text messages to render
     messages: Vec<String>,
