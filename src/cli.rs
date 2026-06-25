@@ -132,10 +132,4 @@ fn get_valid_path(path: &str) -> Option<std::path::PathBuf> {
         return None;
     }
 
-    let path = std::path::Path::new(path);
-    if !path.exists() {
-        return None;
-    }
-
-    Some(path.to_path_buf())
-}
+    Some(std::path::Path::new(path).to_path_buf())
