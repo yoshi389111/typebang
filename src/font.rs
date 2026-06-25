@@ -23,8 +23,8 @@ pub struct Filter {
 
 impl std::fmt::Display for Filter {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self.name {
-            Some(ref name) => write!(f, "{} of {}", name, self.source),
+        match &self.name {
+            Some(name) => write!(f, "{} of {}", name, self.source),
             None => write!(f, "Any font of {}", self.source),
         }
     }
