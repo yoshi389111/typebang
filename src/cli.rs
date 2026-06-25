@@ -133,3 +133,4 @@ fn get_valid_path(path: &str) -> Option<std::path::PathBuf> {
     }
 
     Some(std::path::Path::new(path).to_path_buf())
+}
