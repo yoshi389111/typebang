@@ -7,9 +7,9 @@ pub const GLYPH_HEIGHT: f32 = 100.0;
 
 /// Represents information about a glyph.
 pub struct GlyphInfo {
-    /// X offset from the pen position (glyph origin) to the glyph bounding box's left edge.
+    /// X-coordinate offset from the pen position at the top-left of the glyph.
     pub x_offset: f32,
-    /// Y offset from the font's ascender line to the glyph bounding box's top edge.
+    /// Y-coordinate offset from the pen position at the top-left of the glyph.
     pub y_offset: f32,
     /// Width to advance the pen position after rendering this glyph.
     pub feed_width: f32,
