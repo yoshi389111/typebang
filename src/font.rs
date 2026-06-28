@@ -1,5 +1,6 @@
 use anyhow::Context;
 
+/// Font source, either from a file or the system's installed fonts.
 pub enum Source {
     /// Represents a font loaded from a file.
     File(std::path::PathBuf),
@@ -16,6 +17,7 @@ impl std::fmt::Display for Source {
     }
 }
 
+/// Font filter used to specify the source and name of a font when querying the font database.
 pub struct Filter {
     pub source: Source,
     pub name: Option<String>,
@@ -99,6 +101,7 @@ fn get_font_id(db: &fontdb::Database, font_name: &str) -> Option<fontdb::ID> {
     db.query(&query)
 }
 
+/// Retrieves the list of available font families from the system's font database.
 pub fn get_families() -> anyhow::Result<Vec<String>> {
     let db = create_font_db(&Source::System)?;
     let families = db
@@ -109,6 +112,7 @@ pub fn get_families() -> anyhow::Result<Vec<String>> {
     Ok(families.into_iter().cloned().collect())
 }
 
+/// Retrieves the list of font faces (PostScript names) that match the given filter.
 pub fn get_font_faces(filter: &Filter) -> anyhow::Result<Vec<String>> {
     let db = create_font_db(&filter.source)?;
     let post_script_names = db
@@ -119,6 +123,7 @@ pub fn get_font_faces(filter: &Filter) -> anyhow::Result<Vec<String>> {
     Ok(post_script_names)
 }
 
+/// Creates a font database based on the specified source.
 fn create_font_db(source: &Source) -> anyhow::Result<fontdb::Database> {
     let mut db = fontdb::Database::new();
     match source {
@@ -130,6 +135,7 @@ fn create_font_db(source: &Source) -> anyhow::Result<fontdb::Database> {
     Ok(db)
 }
 
+/// Checks if the given face info matches the target family.
 fn is_target_family(family: &Option<String>, face_info: &fontdb::FaceInfo) -> bool {
     match family {
         Some(name) => face_info

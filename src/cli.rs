@@ -7,12 +7,12 @@ pub fn run(args: &crate::Args) -> anyhow::Result<()> {
     } else if args.list_faces {
         print_font_faces(args)
     } else {
-        output_svg(args)
+        generate_svg(args)
     }
 }
 
 /// Generates the SVG output based on the provided arguments.
-fn output_svg(args: &crate::Args) -> anyhow::Result<()> {
+fn generate_svg(args: &crate::Args) -> anyhow::Result<()> {
     let messages = if is_used_stdin(&args.messages) {
         read_from_stdin()?
     } else {
