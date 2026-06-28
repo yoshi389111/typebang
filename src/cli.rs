@@ -37,6 +37,8 @@ fn generate_svg(args: &crate::Args) -> anyhow::Result<()> {
         bg_color: args.bg_color.clone(),
         strong_color: args.strong_color.clone(),
 
+        angle: args.angle.map(|a| a as f32),
+
         messages,
     };
 
