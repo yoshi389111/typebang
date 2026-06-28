@@ -159,9 +159,10 @@ fn create_enter_glyph_info(config: &GlyphConfig) -> Option<GlyphInfo> {
     let tangent_of_angle = config
         .angle
         .unwrap_or(face.italic_angle())
+        .clamp(-45.0, 45.0)
         .to_radians()
         .tan();
-
+    let tangent_of_angle = if tangent_of_angle.is_finite() { tangent_of_angle } else { 0.0 };
     let path_data = {
         let mut builder = SvgPathBuilder::new(scale, ascender_raw);
         // Draw the outer rectangle.
