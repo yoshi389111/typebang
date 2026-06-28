@@ -2,12 +2,18 @@ use crate::number::round_float;
 use crate::svg_path::SvgPathBuilder;
 use ttf_parser::OutlineBuilder;
 
+/// The height of the glyphs in the SVG output.
 pub const GLYPH_HEIGHT: f32 = 100.0;
 
+/// Represents the information of a glyph.
 pub struct GlyphInfo {
+    /// X-coordinate offset from the pen position at the top-left of the glyph.
     pub x_offset: f32,
+    /// Y-coordinate offset from the pen position at the top-left of the glyph.
     pub y_offset: f32,
+    /// Width to advance the pen position after rendering this glyph.
     pub feed_width: f32,
+    /// SVG symbol representation of the glyph.
     pub symbol: String,
 }
 
