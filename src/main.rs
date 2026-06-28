@@ -25,7 +25,7 @@ pub struct Args {
     #[arg(long, env = "TYPEBANG_STRONG_COLOR", default_value = "#ff2000")]
     strong_color: String,
 
-    /// Rotation angle for rendering control characters (space, enter). default is auto.
+    /// Slant angle (in degrees) for rendering control characters (space, enter). Default: use the font's italic angle.
     #[arg(long, value_parser = value_parser!(i32).range(-45..=45))]
     angle: Option<i32>,
 
