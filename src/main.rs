@@ -1,4 +1,4 @@
-use clap::Parser;
+use clap::{Parser, value_parser};
 mod cli;
 
 #[derive(clap::Parser)]
@@ -24,6 +24,10 @@ pub struct Args {
     /// Strong color to use for rendering text
     #[arg(long, env = "TYPEBANG_STRONG_COLOR", default_value = "#ff2000")]
     strong_color: String,
+
+    /// Slant angle (in degrees) for rendering control characters (space, enter). Default: use the font's italic angle.
+    #[arg(long, value_parser = value_parser!(i32).range(-45..=45))]
+    angle: Option<i32>,
 
     /// List available fonts
     #[arg(long, default_value_t = false)]

@@ -27,6 +27,8 @@ pub struct Config {
     pub bg_color: String,
     pub strong_color: String,
 
+    pub angle: Option<f32>,
+
     pub messages: Vec<String>,
 }
 
@@ -46,12 +48,19 @@ pub fn generate(out: &mut impl std::fmt::Write, config: &Config) -> anyhow::Resu
         bg_color,
         strong_color,
 
+        angle,
+
         messages,
     } = config;
 
     let characters = extract_unique_characters(messages);
+
     let glyph_map = font::load_and_run(font_filter, |face| {
-        glyph::create_glyph_map(face, &characters)
+        let glyph_config = glyph::GlyphConfig {
+            face,
+            angle: *angle,
+        };
+        glyph::create_glyph_map(&glyph_config, &characters)
     })?;
 
     let maximum_message_width = calculate_max_message_width(&glyph_map, messages);
